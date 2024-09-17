@@ -79,13 +79,13 @@ int main(void) {
 
         printf("\n\nRestart the program? [Y/N]\n");
 
-        while (choice == 0) {
+        while (1) {
             choice = getchar();
             choice = tolower(choice);
             if (choice == 'y' || choice == 'n') {
                 break;
             }
-            printf("Invalid input. Please enter Y or N.\n");
+            printf("\nInvalid input. Please enter Y or N.\n");
             fflush(stdin);
         }
 
