@@ -16,7 +16,6 @@ int main(void) {
     do {
         a = b = c = 0;
         DP = 0;
-        choice = 0;
 
         while (a + b <= c || a + c <= b || b + c <= a) {
             fflush(stdin);
@@ -79,8 +78,7 @@ int main(void) {
 
         printf("\n\nRestart the program? [Y/N]\n");
 
-        while (1) {
-            choice = getchar();
+        while (scanf(" %c", &choice) != 1 || choice != 'y' || choice != 'n') {
             choice = tolower(choice);
             if (choice == 'y' || choice == 'n') {
                 break;
@@ -89,12 +87,7 @@ int main(void) {
             fflush(stdin);
         }
 
-        if (choice == 'n') {
-            break;
-        }
-
         clearScreen();
-
         printf("\n");
         fflush(stdin);
 
