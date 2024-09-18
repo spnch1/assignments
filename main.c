@@ -5,7 +5,7 @@
 #include "./include/functions.h"
 
 int main(void) {
-    unsigned char DP = 0; //Decimal Places
+    unsigned DP = 0; //Decimal Places
     double a = 0, b = 0, c = 0; //Sides of the triangle
     double P = 0, p = 0, S = 0, ha = 0, hb = 0, hc = 0, ma = 0, mb = 0, mc = 0, ba = 0, bb = 0, bc = 0; //Perimeter, half-perimeter, area, heights drawn to side N, medians drawn to side N, bisectors drawn to side N
     char choice = 0;
@@ -46,7 +46,7 @@ int main(void) {
 
         printf("\nNow enter the number of decimal points [0,12] for the results:\n");
 
-        while (scanf(" %hhu", &DP) != 1 || DP < 0 || DP > 12) {
+        while (scanf(" %d", &DP) != 1 || DP > 12) {
             printf("\nInvalid input. Please try again...\n");
             fflush(stdin);
         }
