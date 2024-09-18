@@ -1,0 +1,3 @@
+C:/Users/Dmytro/CLionProjects/Programming Basics/W2/cmake-build-debug/CMakeFiles/W2.dir
+C:/Users/Dmytro/CLionProjects/Programming Basics/W2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Dmytro/CLionProjects/Programming Basics/W2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
