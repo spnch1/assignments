@@ -21,7 +21,6 @@ double getEpsilon() {
 
     do {
         epsilon = getDouble("epsilon - ");
-
         if (epsilon < 0) {
             printf("Epsilon must be non-negative! Try again!\n");
             fflush(stdin);
@@ -50,6 +49,7 @@ int getChoice() {
             fflush(stdin);
         }
     } while (choice != 1 && choice != 2);
+
     return choice;
 }
 
@@ -60,6 +60,7 @@ unsigned long long factorial (int n) {
     for (int i = 1; i <= n; i++) {
         fact *= i;
     }
+
     return fact;
 }
 
@@ -67,7 +68,7 @@ double sin_Taylor (double x, double epsilon) {
     double delta = x;
     double result = x;
     int n = 1;
-
+    
     while (fabs(delta) > epsilon) {
         delta *= (-x * x) / ((2 * n) * (2 * n + 1));
         result += delta;
