@@ -1,53 +1,62 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <conio.h>
-#include <string.h>
 
-#define N_STR 50
-#define STR_SIZE 100
-
-void bubble_sort(char *addr[], int n) {
-    for (int i = 0; i < n - 1; i++) {
-        for (int j; j < n - i - 1; j++) {
-            if (strcmp(addr[i], addr[j]) > 0) {
-                char *t = addr[i];
-                addr[i] = addr[j];
-                addr[j] = t;
-            }
-        }
-    }
-}
+#include "functions.h"
 
 int main() {
+    srand(time(NULL));
+    printf("This program sorts strings. A string can only contain English letters. Have fun!\n\n");
+
     do {
-        char list[N_STR][STR_SIZE];
-        char *addr[N_STR];
+        int n = 0, max_len = 0, choice_method = 0, choice_sorting = 0;
 
-        int n;
+        n = get_int("Enter the amount of strings [2, 50]: ", 2, 50);
+        max_len = get_int("Enter the max string length [2, 100]: ", 2, 100);
 
-        printf("Please enter the amount of strings [1,50]:\n");
-        while (scanf("%d", &n) != 1) {
-            printf("The accepted range is 1 to 50. Please try again:\n");
-            fflush(stdin);
+        char arr[n][max_len + 1];
+        char *arr_addr[n];
+
+        for (int i = 0; i < n; i++) {
+            arr_addr[i] = arr[i];
         }
 
-        printf("Please enter the strings:\n");
-        for (int i = 0; i < n + 1; i++) {
-            fgets(list, STR_SIZE, stdin);
-            list[i][strcspn(list, "\n")] = '\0';
-            addr[i] = list[i];
-            fflush(stdin);
-        }
-
-        bubble_sort(addr, n);
-
-        printf("Sorted strings:\n");
-        for (int i = 0; i < n + 1; i++) {
-            puts(addr[i]);
-        }
+        choice_method = get_choice("\nArray filling method (1 - by hand, 2 - random):\n", '1', '2');
         fflush(stdin);
 
-        printf("Press Enter to restart, any key to exit...");
-    } while (getch() == 13);
+        switch (choice_method) {
+            case '1':
+                printf("\n--- INPUT:\n");
+                get_str(arr_addr, n, max_len);
+                break;
+            case '2':
+                get_random_str(arr_addr, n, max_len);
+                printf("\n--- INPUT:\n");
+                print_str(arr_addr, n);
+                break;
+            default:
+                break;
+        }
+
+        choice_sorting = get_choice("\nSorting type (1 - ascending, 2 - descending):\n", '1', '2');
+
+        switch (choice_sorting) {
+            case '1':
+                bubble_sort_asc(arr_addr, n);
+                break;
+            case '2':
+                bubble_sort_desc(arr_addr, n);
+                break;
+            default:
+                break;
+        }
+
+        printf("\n--- OUTPUT:\n");
+        print_str(arr_addr, n);
+
+        printf("\nPress Enter to restart, any key to exit...");
+    } while (getch() == 13 && (clear_screen(), 1));
 
     return 0;
 }
