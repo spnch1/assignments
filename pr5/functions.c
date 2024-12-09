@@ -130,7 +130,7 @@ void print_str(char **str, int n) {
 void clear_screen(void) {
 #ifdef _WIN32
     system("cls");
-#elifdef __unix__
+#elif __unix__
     system("clear");
 #endif
 }
