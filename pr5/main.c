@@ -12,7 +12,7 @@ int main() {
     do {
         int n = 0, max_len = 0, choice_method = 0, choice_sorting = 0;
 
-        n = get_int("Enter the amount of strings [2, 50]: ", 2, 50);
+        n = get_int("Enter the amount of strings [2, 999]: ", 2, 999);
         max_len = get_int("Enter the max string length [2, 100]: ", 2, 100);
 
         char arr[n][max_len + 1];

@@ -67,7 +67,7 @@ int get_choice(char *str, int choice_1, int choice_2) {
 void get_str(char **str, int n, int max_len) {
     for (int i = 0; i < n; i++) {
         do {
-            printf("[%02d] => ", i + 1);
+            printf("[%03d] => ", i + 1);
             if (fgets(str[i], max_len + 2, stdin)) {
                 size_t len = strlen(str[i]);
                 if (len > 0 && str[i][len - 1] == '\n') {
@@ -121,7 +121,7 @@ void get_random_str(char **str, int n, int max_len) {
 
 void print_str(char **str, int n) {
     for (int i = 0; i < n; i++) {
-        printf("[%02d] => %s\n", i + 1, str[i]);
+        printf("[%03d] => %s\n", i + 1, str[i]);
     }
 }
 
