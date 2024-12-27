@@ -30,8 +30,8 @@ int main() {
         }
         
         unsigned char choiceMethod = getChoice("\n---> Choose the solving method:\n"
-                                             BBLK "1. " CRESET "Half division method\n"
-                                             BBLK "2. " CRESET "Newton method\n",
+                                             BBLK "1. " CRESET "Bisection method\n"
+                                             BBLK "2. " CRESET "Newton's method\n",
                                              '1', '2');
         switch (choiceMethod) {
             case '1':
@@ -75,8 +75,10 @@ int main() {
                 printf(ERR_MSG "Invalid input.");
                 break;
         }
+
         double epsilon = getDouble("\nEnter calculation precision;", conditionEpsilon, MIN_EPS, MAX_EPS);
-        calculation(functionChoice, derivativeChoice, a, b, t, epsilon, choiceMethod);
+
+        calculate(functionChoice, derivativeChoice, a, b, t, epsilon, choiceMethod);
 
         printf("\nPress Enter to restart, any key to exit...\n");
     } while (getch() == 13 && (clearScreen(), 1));

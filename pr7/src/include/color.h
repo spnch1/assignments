@@ -2,7 +2,6 @@
 #define COLOR_H
 
 //Messages
-
 #define ERR_MSG "\e[1;31mError: \e[0m"
 #define NOTICE_MSG "\e[1;33m[!] \e[0m"
 

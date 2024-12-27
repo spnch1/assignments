@@ -1,7 +1,3 @@
-//
-// Created by Dmytro on 27/12/2024.
-//
-
 #ifndef FUNCTION_H
 #define FUNCTION_H
 
@@ -38,9 +34,9 @@ unsigned isRootInsideInterval(double x, double a, double b);
 
 // calculation.c
 
-double halfDivision(double (*f)(double, double), double a, double b, double t, double epsilon);
+double bisection(double (*f)(double, double), double a, double b, double t, double epsilon);
 double newton(double (*f)(double, double), double (*df)(double, double), double a, double t, double epsilon);
-void calculation(double (*f)(double, double), double (*df)(double, double), double a, double
+void calculate(double (*f)(double, double), double (*df)(double, double), double a, double
 b, double t, double epsilon, unsigned char calculationMethod);
 
 // misc.c

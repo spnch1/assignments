@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <tgmath.h>
 
-double halfDivision(double (*f)(double, double), double a, double b, double t, double epsilon) {
+double bisection(double (*f)(double, double), double a, double b, double t, double epsilon) {
     double delta = 0;
     int iter = 0;
     double x = 0, fa = 0, fx = 0;
@@ -47,7 +47,7 @@ double newton(double (*f)(double, double), double (*df)(double, double), double 
     return x;
 }
 
-void calculation(double (*f)(double, double), double (*df)(double, double), double a, double b,
+void calculate(double (*f)(double, double), double (*df)(double, double), double a, double b,
 double t, double epsilon, unsigned char calculationMethod) {
     double left = a;
     int precision = fabs(log10(epsilon));
@@ -69,7 +69,7 @@ double t, double epsilon, unsigned char calculationMethod) {
 
             switch (calculationMethod) {
                 case '1':
-                    x = halfDivision(f, left, right, t, epsilon);
+                    x = bisection(f, left, right, t, epsilon);
                     break;
                 case '2':
                     x = newton(f, df, left, t, epsilon);
