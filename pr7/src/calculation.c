@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <tgmath.h>
 
-double halfDivision(double (*function)(double, double), double a, double b, double t, double epsilon) {
+double halfDivision(double (*f)(double, double), double a, double b, double t, double epsilon) {
     double delta = 0;
     int iter = 0;
     double x = 0, fa = 0, fx = 0;
@@ -12,12 +12,11 @@ double halfDivision(double (*function)(double, double), double a, double b, doub
     do {
         x = (a + b) / 2.0;
         delta = fabs(b - a);
-        fa = function(a, t);
-        fx = function(x, t);
-        fa * fx > 0
-                ? (a = x)
-                : (b = x);
+        fa = f(a, t);
+        fx = f(x, t);
+        fa * fx > 0 ? (a = x) : (b = x);
         iter++;
+
         if (iter > MAX_ITER)
             {
             printf(NOTICE_MSG "Maximum iterations outreached. Method did not converge.\n");
@@ -28,13 +27,13 @@ double halfDivision(double (*function)(double, double), double a, double b, doub
     return x;
 }
 
-double newton(double (*function)(double, double), double (*functionDerivative)(double, double), double a, double t, double epsilon) {
+double newton(double (*f)(double, double), double (*df)(double, double), double a, double t, double epsilon) {
     double x = a;
     double delta;
     int iter = 0;
     do {
-        double derivative = functionDerivative(x, t);
-        delta = function(x, t) / derivative;
+        double derivative = df(x, t);
+        delta = f(x, t) / derivative;
         x -= delta;
         iter++;
 
@@ -48,7 +47,8 @@ double newton(double (*function)(double, double), double (*functionDerivative)(d
     return x;
 }
 
-void calculation(double (*function)(double, double), double (*functionDerivative)(double, double), double a, double b, double t, double epsilon, int method) {
+void calculation(double (*f)(double, double), double (*df)(double, double), double a, double b,
+double t, double epsilon, unsigned char calculationMethod) {
     double left = a;
     int precision = fabs(log10(epsilon));
     int rootsFound = 0;
@@ -56,8 +56,8 @@ void calculation(double (*function)(double, double), double (*functionDerivative
 
     while (left < b) {
         double right = fmin(left + STEP, b);
-        double fLeft = function(left, t);
-        double fRight = function(right, t);
+        double fLeft = f(left, t);
+        double fRight = f(right, t);
 
         if (left <= 0 && right >= 0) {
             left = right;
@@ -67,12 +67,12 @@ void calculation(double (*function)(double, double), double (*functionDerivative
         if (fLeft * fRight <= 0) {
             double x = 0;
 
-            switch (method) {
+            switch (calculationMethod) {
                 case '1':
-                    x = halfDivision(function, left, right, t, epsilon);
+                    x = halfDivision(f, left, right, t, epsilon);
                     break;
                 case '2':
-                    x = newton(function, functionDerivative, left, t, epsilon);
+                    x = newton(f, df, left, t, epsilon);
                     break;
                 default:
                     printf(ERR_MSG "Invalid input.\n");

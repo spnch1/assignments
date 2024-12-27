@@ -45,7 +45,7 @@ int main() {
                 break;
         }
         double t = getDouble("\nEnter t:", conditionT, MIN_T, MAX_T);
-        printf("\nEnter intervals of x (from a to b):\n");
+        printf("\n---> Enter intervals of x (from a to b):\n");
         switch (choiceFunction) {
             case '1':
                 functionChoice = equationCos;
@@ -65,8 +65,10 @@ int main() {
                 do {
                     a = getDouble("\nEnter a:", conditionIntervalSin, 1e-15, MAX_RANGE);
                     b = getDouble("\nEnter b:", conditionIntervalSin, 1e-15, MAX_RANGE);
-                    if (a >= b)
-                        printf("Value of a must be less the value of b.\n");
+                    if (a >= b){
+                        printf(ERR_MSG "a must be less than b. Press Enter to try again, Q to exit...\n");
+                        pressToExit();
+                    }
                 } while (a >= b);
                 break;
             default:

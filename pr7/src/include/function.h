@@ -38,9 +38,10 @@ unsigned isRootInsideInterval(double x, double a, double b);
 
 // calculation.c
 
-double halfDivision(double (*function)(double, double), double a, double b, double t, double epsilon);
-double newton(double (*function)(double, double), double (*functionDerivative)(double, double), double a, double t, double epsilon);
-void calculation(double (*function)(double, double), double (*functionDerivative)(double, double), double a, double b, double t, double epsilon, int method);
+double halfDivision(double (*f)(double, double), double a, double b, double t, double epsilon);
+double newton(double (*f)(double, double), double (*df)(double, double), double a, double t, double epsilon);
+void calculation(double (*f)(double, double), double (*df)(double, double), double a, double
+b, double t, double epsilon, unsigned char calculationMethod);
 
 // misc.c
 
