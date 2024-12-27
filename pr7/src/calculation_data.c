@@ -2,18 +2,18 @@
 
 #include <tgmath.h>
 
-double equationCos(double x, double t) {
-    return (cos(t / x) - 2.0 * sin(1.0 / x) + 1.0 / x);
+double equationCos(const double x, const double y) {
+    return (cos(y / x) - 2.0 * sin(1.0 / x) + 1.0 / x);
 }
 
-double equationSin(double x, double t) {
-    return (sin(log(x)) - cos(log(x)) + t * log(x));
+double equationSin(double x, double y) {
+    return (sin(log(x)) - cos(log(x)) + y * log(x));
 }
 
-double equationDerivativeCos(double x, double t) {
-    return ((t * sin(t / x) + 2.0 * cos(1.0 / x) - 1.0) / (x * x));
+double equationDerivativeCos(const double x, double y) {
+    return ((y * sin(y / x) + 2.0 * cos(1.0 / x) - 1.0) / (x * x));
 }
 
-double equationDerivativeSin(double x, double t) {
-    return ((sin(log(x)) + cos(log(x)) + t) / x);
+double equationDerivativeSin(double x, double y) {
+    return ((sin(log(x)) + cos(log(x)) + y) / x);
 }

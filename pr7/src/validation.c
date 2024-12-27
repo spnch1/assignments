@@ -6,7 +6,7 @@
 #include <ctype.h>
 #include <tgmath.h>
 
-double getDouble(char *string, unsigned char (*condition)(double), double min, double max) {
+double getDouble(char *string, unsigned char (*condition)(double), const double min, const double max) {
     double value = 0;
     int validInput = 0;
     do {
@@ -26,7 +26,7 @@ double getDouble(char *string, unsigned char (*condition)(double), double min, d
     return value;
 }
 
-unsigned char getChoice(char *string, unsigned char choice1, unsigned char choice2) {
+unsigned char getChoice(char *string, const unsigned char choice1, const unsigned char choice2) {
     unsigned char value = 0;
     do {
         printf("%s", string);
@@ -42,7 +42,7 @@ unsigned char getChoice(char *string, unsigned char choice1, unsigned char choic
     return value;
 }
 
-unsigned char isRootUnique(double roots[], int count, double newRoot, double epsilon) {
+unsigned char isRootUnique(double roots[], const int count, const double newRoot, double epsilon) {
     for (int i = 0; i < count; i++) {
         if (fabs(roots[i] - newRoot) < epsilon) {
             return 0;
@@ -51,7 +51,7 @@ unsigned char isRootUnique(double roots[], int count, double newRoot, double eps
     return 1;
 }
 
-unsigned isRootInsideInterval(double x, double a, double b) {
+unsigned isRootInsideInterval(const double x, const double a, const double b) {
     if (x < a || x > b) {
         printf(ERR_MSG "Root is outside the given interval.\n");
         return 0;

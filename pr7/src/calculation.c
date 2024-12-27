@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <tgmath.h>
 
-double bisection(double (*f)(double, double), double a, double b, double t, double epsilon) {
+double bisection(double (*f)(double, double), double a, double b, const double y, const double epsilon) {
     double delta = 0;
     int iter = 0;
     double x = 0, fa = 0, fx = 0;
@@ -12,8 +12,8 @@ double bisection(double (*f)(double, double), double a, double b, double t, doub
     do {
         x = (a + b) / 2.0;
         delta = fabs(b - a);
-        fa = f(a, t);
-        fx = f(x, t);
+        fa = f(a, y);
+        fx = f(x, y);
         fa * fx > 0 ? (a = x) : (b = x);
         iter++;
 
@@ -27,13 +27,13 @@ double bisection(double (*f)(double, double), double a, double b, double t, doub
     return x;
 }
 
-double newton(double (*f)(double, double), double (*df)(double, double), double a, double t, double epsilon) {
+double newton(double (*f)(double, double), double (*df)(double, double), const double a, const double y, double epsilon) {
     double x = a;
     double delta;
     int iter = 0;
     do {
-        double derivative = df(x, t);
-        delta = f(x, t) / derivative;
+        const double derivative = df(x, y);
+        delta = f(x, y) / derivative;
         x -= delta;
         iter++;
 
@@ -47,17 +47,17 @@ double newton(double (*f)(double, double), double (*df)(double, double), double 
     return x;
 }
 
-void calculate(double (*f)(double, double), double (*df)(double, double), double a, double b,
-double t, double epsilon, unsigned char calculationMethod) {
+void calculate(double (*f)(double, double), double (*df)(double, double), const double a, double b,
+               const double y, double epsilon, const unsigned char calculationMethod) {
     double left = a;
-    int precision = fabs(log10(epsilon));
+    const int precision = fabs(log10(epsilon));
     int rootsFound = 0;
     double roots[MAX_ROOTS] = {};
 
     while (left < b) {
-        double right = fmin(left + STEP, b);
-        double fLeft = f(left, t);
-        double fRight = f(right, t);
+        const double right = fmin(left + STEP, b);
+        const double fLeft = f(left, y);
+        const double fRight = f(right, y);
 
         if (left <= 0 && right >= 0) {
             left = right;
@@ -69,10 +69,10 @@ double t, double epsilon, unsigned char calculationMethod) {
 
             switch (calculationMethod) {
                 case '1':
-                    x = bisection(f, left, right, t, epsilon);
+                    x = bisection(f, left, right, y, epsilon);
                     break;
                 case '2':
-                    x = newton(f, df, left, t, epsilon);
+                    x = newton(f, df, left, y, epsilon);
                     break;
                 default:
                     printf(ERR_MSG "Invalid input.\n");

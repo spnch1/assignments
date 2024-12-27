@@ -13,9 +13,9 @@ int main() {
         double (*functionChoice)(double, double) = 0;
         double (*derivativeChoice)(double, double) = 0;
 
-        unsigned char choiceFunction = getChoice("\n---> Choose the equation:\n"
-                                               BBLK "1. " CRESET "cos(t / x) - 2 * sin(1 / x) + 1 / x\n"
-                                               BBLK "2. " CRESET "sin(ln(x)) - cos(ln(x)) + t * ln(x)\n",
+        const unsigned char choiceFunction = getChoice("\n---> Choose the equation:\n"
+                                               BBLK "1. " CRESET "cos(y / x) - 2 * sin(1 / x) + 1 / x\n"
+                                               BBLK "2. " CRESET "sin(ln(x)) - cos(ln(x)) + y * ln(x)\n",
                                                '1', '2');
         switch (choiceFunction) {
             case '1':
@@ -29,7 +29,7 @@ int main() {
                 break;
         }
         
-        unsigned char choiceMethod = getChoice("\n---> Choose the solving method:\n"
+        const unsigned char choiceMethod = getChoice("\n---> Choose the solving method:\n"
                                              BBLK "1. " CRESET "Bisection method\n"
                                              BBLK "2. " CRESET "Newton's method\n",
                                              '1', '2');
@@ -44,8 +44,10 @@ int main() {
                 printf(ERR_MSG "Invalid input.");
                 break;
         }
-        double t = getDouble("\nEnter t:", conditionT, MIN_T, MAX_T);
+
+        const double y = getDouble("\nEnter y:", conditionY, MIN_Y, MAX_Y);
         printf("\n---> Enter intervals of x (from a to b):\n");
+
         switch (choiceFunction) {
             case '1':
                 functionChoice = equationCos;
@@ -54,7 +56,7 @@ int main() {
                     a = getDouble("\nEnter a:", conditionIntervalCos, MIN_RANGE, MAX_RANGE);
                     b = getDouble("\nEnter b:", conditionIntervalCos, MIN_RANGE, MAX_RANGE);
                     if (a >= b) {
-                        printf(ERR_MSG "Value of a must be less the value of b.\n");
+                        printf(ERR_MSG "a must be less than b. Press Enter to try again, Q to exit...\n");
                         pressToExit();
                     }
                 } while (a >= b);
@@ -76,9 +78,9 @@ int main() {
                 break;
         }
 
-        double epsilon = getDouble("\nEnter calculation precision;", conditionEpsilon, MIN_EPS, MAX_EPS);
+        const double epsilon = getDouble("\nEnter calculation precision;", conditionEpsilon, MIN_EPS, MAX_EPS);
 
-        calculate(functionChoice, derivativeChoice, a, b, t, epsilon, choiceMethod);
+        calculate(functionChoice, derivativeChoice, a, b, y, epsilon, choiceMethod);
 
         printf("\nPress Enter to restart, any key to exit...\n");
     } while (getch() == 13 && (clearScreen(), 1));
